@@ -7,10 +7,19 @@ VERSION = 0.8.5
 PREFIX = /usr/local
 MANPREFIX = $(PREFIX)/share/man
 
+ifeq($(shell uname),FreeBSD)
+X11INC = /usr/local/include
+X11LIB = /usr/local/lib
+else
 X11INC = /usr/X11R6/include
 X11LIB = /usr/X11R6/lib
+endif
 
+ifeq($(shell uname),FreeBSD)
+PKG_CONFIG = /usr/local/bin/pkg-config
+else
 PKG_CONFIG = pkg-config
+endif
 
 # includes and libs
 INCS = -I$(X11INC) \

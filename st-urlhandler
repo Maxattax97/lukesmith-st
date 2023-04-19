@@ -10,6 +10,10 @@ urls="$(sed 's/.*│//g' | tr -d '\n' | # First remove linebreaks and mutt sideb
 
 [ -z "$urls" ] && exit 1
 
+if [ -x "$(command -v rofi)" ]; then
+	alias dmenu="rofi -dmenu"
+fi
+
 while getopts "hoc" o; do case "${o}" in
 	h) printf "Optional arguments for custom use:\\n  -c: copy\\n  -o: xdg-open\\n  -h: Show this message\\n" && exit 1 ;;
 	o) chosen="$(echo "$urls" | dmenu -i -p 'Follow which url?' -l 10)"
